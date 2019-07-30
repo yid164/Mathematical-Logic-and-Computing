@@ -1,0 +1,111 @@
+Name: Yinsheng Dong
+Student Number: 11148648
+NSID: yid164
+Lecture Section: CMPT 260
+
+
+MySQL [cmpt260_yid164]> drop table Athlete;
+ERROR 1051 (42S02): Unknown table 'Athlete'
+MySQL [cmpt260_yid164]> drop table Doping;
+ERROR 1051 (42S02): Unknown table 'Doping'
+MySQL [cmpt260_yid164]> drop table Results;
+ERROR 1051 (42S02): Unknown table 'Results'
+MySQL [cmpt260_yid164]> CREATE TABLE Athlete (
+    ->  
+    -> athleteId int,
+    -> athlete_Name varchar(15),
+    -> sport varchar(15),
+    -> gender char(1),
+    -> country varchar(15),
+    -> primary key (athleteID)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+MySQL [cmpt260_yid164]> CREATE TABLE Doping (
+    ->  
+    -> athleteId int,
+    -> test int,
+    -> outcome varchar(15),
+    -> primary key (athleteID, test)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+MySQL [cmpt260_yid164]> CREATE TABLE Results (
+    ->  
+    -> event varchar(20),
+    -> sport varchar(15),
+    -> athleteID int,
+    -> medal varchar(6),
+    -> primary key(event,sport)
+    -> );
+Query OK, 0 rows affected (0.00 sec)
+
+MySQL [cmpt260_yid164]> load data local infile 'Athletedata.txt' into table Athlete;
+Query OK, 32 rows affected (0.02 sec)
+Records: 32  Deleted: 0  Skipped: 0  Warnings: 0
+
+MySQL [cmpt260_yid164]> load data local infile 'Dopingdata.txt' into table Doping;
+Query OK, 18 rows affected (0.00 sec)
+Records: 18  Deleted: 0  Skipped: 0  Warnings: 0
+
+MySQL [cmpt260_yid164]> load data local infile 'Resultsdata.txt' into table Results;
+Query OK, 11 rows affected (0.01 sec)
+Records: 11  Deleted: 0  Skipped: 0  Warnings: 0
+
+MySQL [cmpt260_yid164]> show tables;
++--------------------------+
+| Tables_in_cmpt260_yid164 |
++--------------------------+
+| ASSIGNMENT               |
+| Athlete                  |
+| CONSULTANT               |
+| Doping                   |
+| EMPLOYEE                 |
+| PRODUCT                  |
+| Results                  |
+| TITLE_DESIGNATION        |
++--------------------------+
+8 rows in set (0.00 sec)
+
+
+(1)
+MySQL [cmpt260_yid164]> select country from Athlete where Athlete.athleteId in (select athleteId from Doping where outcome='Positive');
++---------+
+| country |
++---------+
+| Togo    |
+| Peru    |
+| Peru    |
+| USA     |
+| Cuba    |
+| Cuba    |
+| Cuba    |
+| Mali    |
++---------+
+8 rows in set (0.00 sec)
+
+(2)
+MySQL [cmpt260_yid164]> select athlete_Name from Athlete where sport='Badminton'and country='Canada' and athleteId in (select athleteId from Doping where outcome='Positive');
+Empty set (0.00 sec)
+
+(3)
+MySQL [cmpt260_yid164]> select count(distinct athleteId) from Doping where outcome='Positive';
++----------+
+| count(*) |
++----------+
+|        9 |
++----------+
+1 row in set (0.00 sec)
+
+(4)
+MySQL [cmpt260_yid164]> select sport from Results where medal='Bronze' or medal='Silver' and athleteID in (select athleteId from Doping where outcome='Positive');
++---------------+
+| sport         |
++---------------+
+| Weightlifting |
+| Rowing        |
+| Rowing        |
+| Rowing        |
+| Badminton     |
++---------------+
+5 rows in set (0.01 sec)

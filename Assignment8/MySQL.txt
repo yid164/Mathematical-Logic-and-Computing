@@ -1,0 +1,5 @@
+Username: cmpt260_yid164
+Password: jjozp5gg0o
+
+
+mysql -p -u cmpt260_yid164 -h db.cs.usask.ca  -D cmpt260_yid164
