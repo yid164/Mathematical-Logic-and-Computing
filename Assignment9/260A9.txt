@@ -1,0 +1,97 @@
+Name: Yinsheng Dong
+Student Number: 11148648
+NSID: yid164
+Lecture Section: CMPT 260
+
+MySQL [cmpt260_yid164]> show tables;
++--------------------------+
+| Tables_in_cmpt260_yid164 |
++--------------------------+
+| ASSIGNMENT               |
+| Athlete                  |
+| CONSULTANT               |
+| Doping                   |
+| EMPLOYEE                 |
+| PRODUCT                  |
+| Results                  |
+| TITLE_DESIGNATION        |
++--------------------------+
+8 rows in set (0.11 sec)
+
+MySQL [cmpt260_yid164]> describe Athlete;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| athleteId    | int(11)     | NO   | PRI | 0       |       |
+| athlete_Name | varchar(15) | YES  |     | NULL    |       |
+| sport        | varchar(15) | YES  |     | NULL    |       |
+| gender       | char(1)     | YES  |     | NULL    |       |
+| country      | varchar(15) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+MySQL [cmpt260_yid164]> describe Results;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| event     | varchar(20) | NO   | PRI |         |       |
+| sport     | varchar(15) | NO   | PRI |         |       |
+| athleteID | int(11)     | YES  |     | NULL    |       |
+| medal     | varchar(6)  | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+MySQL [cmpt260_yid164]> describe Doping;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| athleteId | int(11)     | NO   | PRI | 0       |       |
+| test      | int(11)     | NO   | PRI | 0       |       |
+| outcome   | varchar(15) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+1.
+
+MySQL [cmpt260_yid164]> select distinct country from Athlete a, Doping d where a.athleteId = d.athleteId and d.outcome = 'Positive';
++---------+
+| country |
++---------+
+| Togo    |
+| Peru    |
+| USA     |
+| Cuba    |
+| Mali    |
++---------+
+5 rows in set (0.00 sec)
+
+2.
+MySQL [cmpt260_yid164]> select athlete_Name from Athlete where athleteId in (select athleteId from Doping where outcome='Positive') and athleteId in (select athleteId from Results); 
++--------------+
+| athlete_Name |
++--------------+
+| Tricky       |
+| Lehn         |
+| Mehn         |
+| Xu           |
++--------------+
+4 rows in set (0.00 sec)
+
+3.
+MySQL [cmpt260_yid164]> select count(distinct a.athleteId) from Athlete a, Results r where a.athleteId = r.athleteId and a.gender='w' and r.medal='Bronze';
++-----------------------------+
+| count(distinct a.athleteId) |
++-----------------------------+
+|                           1 |
++-----------------------------+
+1 row in set (0.00 sec)
+
+4.
+MySQL [cmpt260_yid164]> select athlete_Name from Athlete where athleteId in (select athleteId from Doping where test= '1' and outcome='Positive') and athleteId in (select athleteId from Doping where test !='1' and outcome='Negative');
++--------------+
+| athlete_Name |
++--------------+
+| Tricky       |
++--------------+
+1 row in set (0.00 sec)
