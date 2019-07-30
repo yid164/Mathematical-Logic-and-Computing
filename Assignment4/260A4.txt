@@ -1,0 +1,42 @@
+Student Name: Yinsheng Dong
+Student Number: 11148648
+NSID: yid164
+Lecture Section: CMPT 260
+
+
+(1).
+
+  1. ∀x(P (x) ∨ Q(x))  	   Permise 
+  2. P (x) ∨ Q(x)          1 U.I.
+  3. ~P (x)                Assumption for D.T
+  4. Q(x)                  2 3 Elimination 
+  5. ∀x ~P(x)              3 U.G.
+  6. ∀x Q(x)               4 U.G.
+  7. ∀x Q(x) v ~∀x~P(x)    6 Generalization
+  8. ∀x Q(x) v ~ ~ ∃xP(x)  7 negation of ∀
+  9. ∀x Q(x) v ∃x P(x)     8 double negation
+  10. ∃xP(x) v ∀x Q(x)     9 commutative 
+
+
+(2).
+
+  1. Error in line 6, EIV, conclusion does not follow from the premise
+
+  2. Error in line 7, IS, conclusion does not follow from the premise?
+
+  3. Error in line 4, EV, conclusion does not follow from the premise
+
+  4. Error in line 5, EIV, conclusion does follow from the premise. Proof redone below:
+
+	Statement 				Justification
+	1.∀yP(y) ∧∃xQ(x)			premise
+	2.∀yP(y)				1, specialization
+	3.∃xQ(x)				1, specialization
+	4.Q(z)					3, E.I
+	5.P(z)					2, U.I
+	6.Q(z) ∧ P(z)				4,5 conjunction
+	7.P(z) ∧ Q(z)				commutative 
+	8.∼(∼P(z) ∨ ∼Q(z))			7, De Morgan, double negation
+	9.∃z ∼(∼P(z) ∨ ∼Q(z))			8, E.G
+	10.∼∀z(∼P(z) ∨ ∼Q(z))			9, ∼∀z(∼P(z) ∨ ∼Q(z))
+	11. ∼∀z(P(z) →∼Q(z))			10, introduction of conditional
