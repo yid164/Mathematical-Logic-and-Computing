@@ -1,0 +1,65 @@
+Name: Yinsheng Dong
+Student Number: 11148648
+NSID: yid164
+Lecture Section: CMPT 260 
+
+
+
+1.
+For all sets A, B, and C, if A ⊆ B and B ∩ C = ∅ then A ∩ C = ∅.
+
+Proof by contradiction:
+
+Assume to the contrary that ∃x ∈ A ∩ C. But
+
+by definition of intersection x ∈ A and x ∈ X
+
+if x ∈ A, by definition of subset x ∈ B
+
+Since A is the subset of B
+
+That means if A ∩ C ≠ ∅, there must be B ∩ C ≠ ∅, but this contradicts the question that B ∩ C = ∅, thus we can conclude that for all sets A, B, and C, if A ⊆ B and B ∩ C = ∅ then A ∩ C = ∅.
+
+2.
+(( A ∩ ( B ∪ C ) ) ∩ ( A − B ) ) ∩ ( B ∪ C^c)
+
+= ( ( ( A ∩ B ) ∪ ( A ∩ C ) ) ∩ ( A − B ) ) ∩ ( B ∪ C^c)        			distributive law
+
+= ( ( ( A ∩ B ) ∪ ( A ∩ C ) ) ∩ ( A ∩ B^c ) ) ∩ ( B ∪ C^c)       			set difference law
+
+= ( ( ( A ∩ B ) ∩ ( A ∩ B^c ) ) ∪ ( ( A ∩ C ) ∩ ( A ∩ B^c ) ) ) ∩ ( B ∪ C^c)	distributive law
+
+= ( ( A ∩ A ∩ B ∩ B^c ) ∪ ( A ∩ A ∩ C ∩ B^c ) ) ∩ ( B ∪ C^c)			associative law
+
+= ( ( A ∩ B ∩ B^c ) ∪ ( A ∩ C ∩ B^c ) ) ∩ ( B ∪ C^c)				idempotent law
+
+= ( ( A ∩ ∅ ) ∪ ( A ∩ C ∩ B^c ) ) ∩ ( B ∪ C^c)					complement law
+
+= ( ∅ ∪ ( A ∩ C ∩ B^c ) ) ∩ ( B ∪ C^c)						identity law
+
+= ( A ∩ C ∩ B^c ) ∩ ( B ∪ C^c)							identity law
+
+= (( A ∩ C ∩ B^c ) ∩ B) ∪ (( A ∩ C ∩ B^c ) ∩ C^c)					distributive law
+
+= ( A ∩ C ∩ B^c ∩ B) ∪ ( A ∩ C ∩ B^c ∩ C^c)					associative law
+
+= ( A ∩ C ∩ ∅) ∪ ( A ∩ B^c ∩ ∅)							complement law
+
+= ∅ ∪ ∅										identity law
+
+= ∅										identity
+
+
+3.
+
+Let T = {(0,2),(1,0),(2,3),(3,1)}. Find T^t, the transitive closure of T 
+		
+T^t = T ∪ T^2 ∪ T^3 ∪ T^4
+
+T^2 = { (0,3), (1,2), (2,1), (3,0) }
+
+T^3 = { (0,1), (1,3), (2,0), (3,2) }
+
+T^4 = { (0,0), (1,1), (2,2), (3,3) }
+
+So, the T^t = { (0,2),(1,0),(2,3),(3,1), (0,3), (1,2), (2,1), (3,0), (0,1), (1,3), (2,0), (3,2), (0,0), (1,1), (2,2), (3,3) }
